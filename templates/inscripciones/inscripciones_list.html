@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Listado de Inscripciones</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Fecha del Seminario</th>
+        <th>Empresa o Institución</th>
+        <th>Email</th>
+        <th>Profesión</th>
+        <th>Observaciones</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for inscripcion in inscripciones %}
+        <tr>
+          <td>{{ inscripcion.nombre }}</td>
+          <td>{{ inscripcion.telefono }}</td>
+          <td>{{ inscripcion.fecha_seminario }}</td>
+          <td>{{ inscripcion.empresa }}</td>
+          <td>{{ inscripcion.email }}</td>
+          <td>{{ inscripcion.profesion }}</td>
+          <td>{{ inscripcion.observaciones }}</td>
+          <td>
+            <a href="{% url 'inscripciones:inscripcion_editar' inscripcion.id %}" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Editar
+            </a>
+            <a href="{% url 'inscripciones:inscripcion_eliminar' inscripcion.id %}" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Eliminar
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'inscripciones:inscripcion_agregar' %}" class="btn btn-success">
+    <i class="fas fa-plus"></i> Agregar Inscripción
+  </a>
+{% endblock %}
